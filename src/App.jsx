@@ -9,9 +9,30 @@ import plantSampleAbove5 from './assets/plant-sample-above-5.jpg';
 import plantSampleAbove6 from './assets/plant-sample-above-6.jpg';
 import plantSampleAbove7 from './assets/plant-sample-above-7.jpg';
 import PlantCard from './PlantCard';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
 function App() {
   const [imageSize, setImageSize] = useState(200);
+
+  const responsive = {
+    superLargeDesktop: {
+      breakpoint: { max: 4000, min: 3000 },
+      items: 7
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 5
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 584 },
+      items: 3
+    },
+    mobile: {
+      breakpoint: { max: 584, min: 0 },
+      items: 2
+    }
+  };
 
   const [plantImages, setPlantImages] = useState([
     plantSampleAbove1,
@@ -54,6 +75,11 @@ function App() {
       image: plantSampleAbove6,
       coverage: 0.53,
     },
+    {
+      day: 7,
+      image: plantSampleAbove7,
+      coverage: 0.56,
+    },
   ]);
 
   const populatePlantData = () => {
@@ -93,10 +119,12 @@ function App() {
   return (
     <div className="App">
       <h1>React Plant Track</h1>
-      <div className="cards">
+      {/* <div className="cards"> */}
+      <Carousel responsive={responsive}>
         {cardData}
-      </div>
-      <div id="curve_chart" style={{width: "100%", height: "500px"}}></div>
+      </Carousel>
+      {/* </div> */}
+      <div id="curve_chart"></div>
     </div>
   )
 }
