@@ -8,6 +8,20 @@ import plantSampleAbove4 from './assets/plant-sample-above-4.jpg';
 import plantSampleAbove5 from './assets/plant-sample-above-5.jpg';
 import plantSampleAbove6 from './assets/plant-sample-above-6.jpg';
 import plantSampleAbove7 from './assets/plant-sample-above-7.jpg';
+
+import cactusSample1 from './assets/cactus-sample-1.png';
+import cactusSample2 from './assets/cactus-sample-2.png';
+import cactusSample3 from './assets/cactus-sample-3.png';
+import cactusSample4 from './assets/cactus-sample-4.png';
+import cactusSample5 from './assets/cactus-sample-5.png';
+import cactusSample6 from './assets/cactus-sample-6.png';
+import cactusSample7 from './assets/cactus-sample-7.png';
+import cactusSample8 from './assets/cactus-sample-8.png';
+import cactusSample9 from './assets/cactus-sample-9.png';
+import cactusSample10 from './assets/cactus-sample-10.png';
+import cactusSample11 from './assets/cactus-sample-11.png';
+import cactusSample12 from './assets/cactus-sample-12.png';
+
 import PlantCard from './PlantCard';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
@@ -34,7 +48,7 @@ function App() {
     }
   };
 
-  const [plantImages, setPlantImages] = useState([
+  const commonBox = [
     plantSampleAbove1,
     plantSampleAbove2,
     plantSampleAbove3,
@@ -42,7 +56,24 @@ function App() {
     plantSampleAbove5,
     plantSampleAbove6,
     plantSampleAbove7,
-  ]);
+  ];
+
+  const cactus = [
+    cactusSample1,
+    cactusSample2,
+    cactusSample3,
+    cactusSample4,
+    cactusSample5,
+    cactusSample6,
+    cactusSample7,
+    cactusSample8,
+    cactusSample9,
+    cactusSample10,
+    cactusSample11,
+    cactusSample12,
+  ]
+
+  const [plantImages, setPlantImages] = useState(cactus);
 
   const [plantData, setPlantData] = useState([
     {
@@ -119,11 +150,9 @@ function App() {
   return (
     <div className="App">
       <h1>React Plant Track</h1>
-      {/* <div className="cards"> */}
       <Carousel responsive={responsive}>
         {cardData}
       </Carousel>
-      {/* </div> */}
       <div id="curve_chart"></div>
     </div>
   )
