@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import React from 'react';
 
 export default function PlantCard(props) {
-  const [coverage, setCoverage] = useState(0);
+  const [coverage, setCoverage] = useState();
   const sz = props.imageSize;
   
   const drawCanvas = (props) => {
@@ -16,6 +16,7 @@ export default function PlantCard(props) {
     let color = 0;
     
     for (let i = 0; i < canvasData.length; i += 4) {
+      // Method 1
       if (Math.abs(canvasData[i] - canvasData[i+1]) < 25 && Math.abs(canvasData[i] - canvasData[i+2]) < 15) {
         // Draw white/pink area
         canvas.data[i] = 255;
@@ -30,6 +31,7 @@ export default function PlantCard(props) {
         // Count green pixels
         color++;
       }
+      // Method 2
       // if (canvasData[i] < 245 && canvasData[i+1] < 245 && canvasData[i+2] < 245) {
       //   // Draw green area
       //   canvas.data[i] = 0;
@@ -64,9 +66,21 @@ export default function PlantCard(props) {
     <div className="PlantCard">
       <h2>Day {props.day}</h2>
       <h3>Orignal Image</h3>
-      <img id={"sample-" + props.day} src={props.image} alt="plant sample above" width={sz} height={sz} onLoad={() => init(props)}/>
+      <img 
+        id={"sample-" + props.day} 
+        src={props.image} 
+        alt="plant sample above" 
+        width={sz} 
+        height={sz} 
+        onLoad={() => init(props)}
+      />
       <h3>Canvas:</h3>
-      <canvas id={"canvas-" + props.day} width={sz} height={sz} style={{border: "1px solid"}} />
+      <canvas 
+        id={"canvas-" + props.day} 
+        width={sz} 
+        height={sz} 
+        style={{border: "1px solid"}} 
+      />
       <br />
       <br />
       <p>Area Coverage: {coverage + '%'}</p>

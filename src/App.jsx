@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import React from 'react';
 import './App.css'
+
 import plantSampleAbove1 from './assets/plant-sample-above-1.jpg';
 import plantSampleAbove2 from './assets/plant-sample-above-2.jpg';
 import plantSampleAbove3 from './assets/plant-sample-above-3.jpg';
@@ -25,6 +26,7 @@ import cactusSample12 from './assets/cactus-sample-12.png';
 import PlantCard from './PlantCard';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import Chart from './Chart';
 
 function App() {
   const [imageSize, setImageSize] = useState(200);
@@ -157,19 +159,6 @@ function App() {
     dataTable.push([plantData[i].day, plantData[i].coverage]);
   }
 
-  google.charts.load('current', { 'packages': ['corechart'] });
-  google.charts.setOnLoadCallback(drawChart);
-
-  function drawChart() {
-    var data = google.visualization.arrayToDataTable(dataTable);
-    var options = {
-      curveType: 'function',
-      legend: { position: 'bottom' }
-    };
-    var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-    chart.draw(data, options);
-  }
-
   const cardData = plantData.map((plant, index) => {
     return <PlantCard 
       key={index} 
@@ -196,7 +185,7 @@ function App() {
       <Carousel responsive={responsive}>
         {cardData}
       </Carousel>
-      <div id="curve_chart"></div>
+      <Chart data={dataTable} />
     </div>
   )
 }
