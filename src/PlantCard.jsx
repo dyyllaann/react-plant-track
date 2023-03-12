@@ -16,7 +16,12 @@ export default function PlantCard(props) {
     let color = 0;
     
     for (let i = 0; i < canvasData.length; i += 4) {
-      if (canvasData[i] < 245 && canvasData[i+1] < 255 && canvasData[i+2] < 245) {
+      if (Math.abs(canvasData[i] - canvasData[i+1]) < 25 && Math.abs(canvasData[i] - canvasData[i+2]) < 15) {
+        // Draw white/pink area
+        canvas.data[i] = 255;
+        canvas.data[i+1] = 200;
+        canvas.data[i+2] = 255;
+      } else {
         // Draw green area
         canvas.data[i] = 0;
         canvas.data[i+1] = 255;
@@ -24,12 +29,21 @@ export default function PlantCard(props) {
 
         // Count green pixels
         color++;
-      } else {
-        // Draw white/pink area
-        canvas.data[i] = 255;
-        canvas.data[i+1] = 200;
-        canvas.data[i+2] = 255;
       }
+      // if (canvasData[i] < 245 && canvasData[i+1] < 245 && canvasData[i+2] < 245) {
+      //   // Draw green area
+      //   canvas.data[i] = 0;
+      //   canvas.data[i+1] = 255;
+      //   canvas.data[i+2] = 0;
+
+      //   // Count green pixels
+      //   color++;
+      // } else {
+      //   // Draw white/pink area
+      //   canvas.data[i] = 255;
+      //   canvas.data[i+1] = 200;
+      //   canvas.data[i+2] = 255;
+      // }
     }
 
     const c = document.getElementById("canvas-" + props.day).getContext("2d");
