@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import React from 'react';
 import './App.css'
 import plantSampleAbove1 from './assets/plant-sample-above-1.jpg';
@@ -48,34 +48,70 @@ function App() {
     }
   };
 
-  const commonBox = [
-    plantSampleAbove1,
-    plantSampleAbove2,
-    plantSampleAbove3,
-    plantSampleAbove4,
-    plantSampleAbove5,
-    plantSampleAbove6,
-    plantSampleAbove7,
-  ];
-
-  const cactus = [
-    cactusSample1,
-    cactusSample2,
-    cactusSample3,
-    cactusSample4,
-    cactusSample5,
-    cactusSample6,
-    cactusSample7,
-    cactusSample8,
-    cactusSample9,
-    cactusSample10,
-    cactusSample11,
-    cactusSample12,
+  const cactusData = [
+    {
+      day: 1,
+      image: cactusSample1,
+      coverage: 0.05,
+    },
+    {
+      day: 8,
+      image: cactusSample2,
+      coverage: 0.06,
+    },
+    {
+      day: 15,
+      image: cactusSample3,
+      coverage: 0.1,
+    },
+    {
+      day: 22,
+      image: cactusSample4,
+      coverage: 0.17,
+    },
+    {
+      day: 29,
+      image: cactusSample5,
+      coverage: 0.3,
+    },
+    {
+      day: 36,
+      image: cactusSample6,
+      coverage: 0.53,
+    },
+    {
+      day: 43,
+      image: cactusSample7,
+      coverage: 0.56,
+    },
+    {
+      day: 50,
+      image: cactusSample8,
+      coverage: 0.56,
+    },
+    {
+      day: 57,
+      image: cactusSample9,
+      coverage: 0.56,
+    },
+    {
+      day: 64,
+      image: cactusSample10,
+      coverage: 0.56,
+    },
+    {
+      day: 71,
+      image: cactusSample11,
+      coverage: 0.56,
+    },
+    {
+      day: 78,
+      image: cactusSample12,
+      coverage: 0.56,
+    },
   ]
 
-  const [plantImages, setPlantImages] = useState(cactus);
-
-  const [plantData, setPlantData] = useState([
+  const commonBoxData = [
     {
       day: 1,
       image: plantSampleAbove1,
@@ -111,18 +147,9 @@ function App() {
       image: plantSampleAbove7,
       coverage: 0.56,
     },
-  ]);
+  ];
 
-  const populatePlantData = () => {
-    const newPlantData = plantImages.map((index) => {
-      return {
-        day: index + 1,
-        image: plantImages[index],
-        coverage: plant.coverage,
-      }
-    })
-    setPlantData(newPlantData);
-  }
+  const [plantData, setPlantData] = useState(cactusData);
 
   let dataTable = [['Day', 'Area Coverage']];
 
@@ -144,12 +171,21 @@ function App() {
   }
 
   const cardData = plantData.map((plant, index) => {
-    return <PlantCard key={index} day={plant.day} image={plant.image} imageSize={imageSize} />
+    return <PlantCard 
+      key={index} 
+      day={plant.day} 
+      image={plant.image} 
+      imageSize={imageSize}
+    />
   })
 
   return (
     <div className="App">
       <h1>React Plant Track</h1>
+      <div className="sample-menu">
+        <button onClick={() => setPlantData(cactusData)}>Cactus Plant (Raw Images)</button>
+        <button onClick={() => setPlantData(commonBoxData)}>Common Box Plant (Edited Images)</button>
+      </div>
       <Carousel responsive={responsive}>
         {cardData}
       </Carousel>

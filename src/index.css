@@ -67,3 +67,7 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.sample-menu > * {
+  margin: 0 10px;
+}

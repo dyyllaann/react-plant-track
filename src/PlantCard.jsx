@@ -1,14 +1,14 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import React from 'react';
 
 export default function PlantCard(props) {
   const [coverage, setCoverage] = useState(0);
+  const sz = props.imageSize;
   
   const drawCanvas = (props) => {
-    var c = document.getElementById("canvas-" + props.day);
-    var ctx = c.getContext("2d");
+    var c = document.getElementById("canvas-" + props.day).getContext("2d");
     var img = document.getElementById("sample-" + props.day);
-    ctx.drawImage(img, 0, 0, props.imageSize, props.imageSize);
+    c.drawImage(img, 0, 0, sz, sz);
   };
 
   const analyzeColorArea = (canvas) => {
@@ -17,11 +17,15 @@ export default function PlantCard(props) {
     
     for (let i = 0; i < canvasData.length; i += 4) {
       if (canvasData[i] < 245 && canvasData[i+1] < 255 && canvasData[i+2] < 245) {
+        // Draw green area
         canvas.data[i] = 0;
         canvas.data[i+1] = 255;
         canvas.data[i+2] = 0;
+
+        // Count green pixels
         color++;
       } else {
+        // Draw white/pink area
         canvas.data[i] = 255;
         canvas.data[i+1] = 200;
         canvas.data[i+2] = 255;
@@ -38,7 +42,7 @@ export default function PlantCard(props) {
     drawCanvas(props);
 
     const c = document.getElementById("canvas-" + props.day).getContext("2d");
-    let canvas = c.getImageData(0, 0, props.imageSize, props.imageSize);
+    let canvas = c.getImageData(0, 0, sz, sz);
     analyzeColorArea(canvas);
   }
 
@@ -46,9 +50,9 @@ export default function PlantCard(props) {
     <div className="PlantCard">
       <h2>Day {props.day}</h2>
       <h3>Orignal Image</h3>
-      <img id={"sample-" + props.day} src={props.image} alt="plant sample above" width={props.imageSize} height={props.imageSize} onLoad={() => init(props)}/>
+      <img id={"sample-" + props.day} src={props.image} alt="plant sample above" width={sz} height={sz} onLoad={() => init(props)}/>
       <h3>Canvas:</h3>
-      <canvas id={"canvas-" + props.day} width={props.imageSize} height={props.imageSize} style={{border: "1px solid"}} />
+      <canvas id={"canvas-" + props.day} width={sz} height={sz} style={{border: "1px solid"}} />
       <br />
       <br />
       <p>Area Coverage: {coverage + '%'}</p>
