@@ -182,6 +182,13 @@ function App() {
   return (
     <div className="App">
       <h1>React Plant Track</h1>
+      <div className="project-description">
+        <h2>Overview</h2>
+        <p>
+          React Plant Track (RPT) is a tool that analyzes plant growth data by tracking the area coverage of the plant over time. 
+          This is done entirely in the browser using the HTML canvas element and JavaScript to extract the image data and compare the color values of each pixel.
+        </p>
+      </div>
       <div className="sample-menu">
         <button onClick={() => setPlantData(cactusData)}>Cactus Plant (Raw Images)</button>
         <button onClick={() => setPlantData(commonBoxData)}>Common Box Plant (Edited Images)</button>

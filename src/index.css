@@ -71,3 +71,8 @@ button:focus-visible {
 .sample-menu > * {
   margin: 0 10px;
 }
+
+.project-description {
+  margin: 0 auto;
+  max-width: 80%;
+}
