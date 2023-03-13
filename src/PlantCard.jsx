@@ -74,7 +74,7 @@ export default function PlantCard(props) {
         height={sz} 
         onLoad={() => init(props)}
       />
-      <h3>Canvas:</h3>
+      <h3>Selection:</h3>
       <canvas 
         id={"canvas-" + props.day} 
         width={sz} 
