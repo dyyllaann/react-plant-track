@@ -72,7 +72,7 @@ button:focus-visible {
   margin: 0 10px;
 }
 
-.project-description {
+.project-description, .methodology, .sample-menu {
   margin: 0 auto;
   max-width: 80%;
 }

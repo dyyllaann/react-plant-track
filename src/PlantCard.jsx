@@ -3,20 +3,27 @@ import React from 'react';
 
 export default function PlantCard(props) {
   const [coverage, setCoverage] = useState();
+  const [growth, setGrowth] = useState();
+
   const sz = props.imageSize;
   
-  const drawCanvas = (props) => {
+  const createCanvas = (props) => {
     var c = document.getElementById("canvas-" + props.day).getContext("2d");
     var img = document.getElementById("sample-" + props.day);
     c.drawImage(img, 0, 0, sz, sz);
   };
 
-  const analyzeColorArea = (canvas) => {
+  const drawCanvas = (props, canvas) => {
+    const c = document.getElementById("canvas-" + props.day).getContext("2d");
+    c.putImageData(canvas, 0, 0);
+  }
+
+  const getGreenArea = (c) => {
+    let canvas = c.getImageData(0, 0, sz, sz);
     const canvasData = canvas.data;
     let color = 0;
     
     for (let i = 0; i < canvasData.length; i += 4) {
-      // Method 1
       if (Math.abs(canvasData[i] - canvasData[i+1]) < 25 && Math.abs(canvasData[i] - canvasData[i+2]) < 15) {
         // Draw white/pink area
         canvas.data[i] = 255;
@@ -31,35 +38,38 @@ export default function PlantCard(props) {
         // Count green pixels
         color++;
       }
-      // Method 2
-      // if (canvasData[i] < 245 && canvasData[i+1] < 245 && canvasData[i+2] < 245) {
-      //   // Draw green area
-      //   canvas.data[i] = 0;
-      //   canvas.data[i+1] = 255;
-      //   canvas.data[i+2] = 0;
-
-      //   // Count green pixels
-      //   color++;
-      // } else {
-      //   // Draw white/pink area
-      //   canvas.data[i] = 255;
-      //   canvas.data[i+1] = 200;
-      //   canvas.data[i+2] = 255;
-      // }
     }
 
-    const c = document.getElementById("canvas-" + props.day).getContext("2d");
-    c.putImageData(canvas, 0, 0);
-    let ratio = Math.round(color/(canvasData.length/4) * 100);
-    return setCoverage(ratio);
+    let ratio = color/(canvasData.length/4) * 100;
+    drawCanvas(props, canvas);
+    setCoverage(ratio.toFixed(2));
+  }
+
+  const getPlantHeight = (c) => {
+    let canvas = c.getImageData(0, 0, sz, sz);
+    const canvasData = canvas.data;
+    // let distanceFromTop = 1;
+
+    for (let distanceFromTop = 1; distanceFromTop < canvasData.length/4; distanceFromTop++) {
+      // const canvasLine = c.getImageData(0, distanceFromTop-1, 100, distanceFromTop).data;
+      // for (let i = 0; i < canvasLine.length; i += 4) {
+      //   if (Math.abs(canvasLine[i] - canvasLine[i+1]) < 25 && Math.abs(canvasLine[i] - canvasLine[i+2]) < 15) {
+      //     return distanceFromTop;
+      //   }
+      // }
+    }
+  }
+
+  const analyzeColorArea = (c) => {
+    getGreenArea(c);
+    console.log(getPlantHeight(c));
   }
 
   const init = () => {
-    drawCanvas(props);
+    createCanvas(props);
 
     const c = document.getElementById("canvas-" + props.day).getContext("2d");
-    let canvas = c.getImageData(0, 0, sz, sz);
-    analyzeColorArea(canvas);
+    analyzeColorArea(c);
   }
 
   return (

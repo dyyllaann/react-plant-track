@@ -54,62 +54,62 @@ function App() {
     {
       day: 1,
       image: cactusSample1,
-      coverage: 0.05,
+      coverage: 8.30,
     },
     {
       day: 8,
       image: cactusSample2,
-      coverage: 0.06,
+      coverage: 9.01,
     },
     {
       day: 15,
       image: cactusSample3,
-      coverage: 0.1,
+      coverage: 9.78,
     },
     {
       day: 22,
       image: cactusSample4,
-      coverage: 0.17,
+      coverage: 10.05,
     },
     {
       day: 29,
       image: cactusSample5,
-      coverage: 0.3,
+      coverage: 10.32,
     },
     {
       day: 36,
       image: cactusSample6,
-      coverage: 0.53,
+      coverage: 10.90,
     },
     {
       day: 43,
       image: cactusSample7,
-      coverage: 0.56,
+      coverage: 12.95,
     },
     {
       day: 50,
       image: cactusSample8,
-      coverage: 0.56,
+      coverage: 14.43,
     },
     {
       day: 57,
       image: cactusSample9,
-      coverage: 0.56,
+      coverage: 13.81,
     },
     {
       day: 64,
       image: cactusSample10,
-      coverage: 0.56,
+      coverage: 13.80,
     },
     {
       day: 71,
       image: cactusSample11,
-      coverage: 0.56,
+      coverage: 13.59,
     },
     {
       day: 78,
       image: cactusSample12,
-      coverage: 0.56,
+      coverage: 14.21,
     },
   ]
 
@@ -188,7 +188,20 @@ function App() {
           </li>
         </ul>
       </div>
+      <div className='methodology'>
+        <h2>Methodology</h2>
+        <p>The HTML canvas element converts images into data that can be measured and manipulated. 
+          The data is stored in an array, where every four elements in the array represents a pixel.
+          Each pixel contains an RGB value, which can be used to determine the color of the pixel, and the alpha value, which can be used to determine the opacity of the pixel. 
+        </p>
+      </div>
       <div className="sample-menu">
+        <h2>Examples</h2>
+        <p>
+          The first set of images were modified from a single image using Photoshop.
+          To make the app more similar to a real life scenario, the second set of images were taken from a timelapse video of real plant.
+        </p>
+        <br />
         <button onClick={() => setPlantData(cactusData)}>Cactus Plant (Raw Images)</button>
         <button onClick={() => setPlantData(commonBoxData)}>Common Box Plant (Edited Images)</button>
       </div>
