@@ -30,4 +30,5 @@
           To make the app more similar to a real life scenario, the second set of images were taken from a timelapse video of real plant.
         </p>
         <br />
+        <img src="./src/assets/screen-1.png" />
       </div>
