@@ -31,4 +31,5 @@
         </p>
         <br />
         <img src="./src/assets/screen-1.png" />
+        <img src="./src/assets/screen-2.png" />
       </div>
